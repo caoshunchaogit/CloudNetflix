@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: Eureka-provider
+server:
+  port: 7003
+
+eureka:
+  client:
+    service-url:  # 将自己注册到euk1.com 7001 的这个服务注册中心去
+      defaultZone: http://euk1.com:7001/eureka/
+  instance:
+    metadata-map:
+      dalao2: csc2hahaha

@@ -1,0 +1,13 @@
+
+#
+##eureka:
+##  client:
+##    register-with-eureka: false  # 是否注册自己
+##    fetch-registry: false  # 是否拉去其他节点信息
+##    service-url:  # 服务注册中心的地址
+##      defaultZone: http://euk2.com:7002/eureka/   #单节点搭建
+spring:
+  application:
+    name: EurekaServer
+  profiles:
+    active: euk1

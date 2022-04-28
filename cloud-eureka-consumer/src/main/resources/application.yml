@@ -1,0 +1,10 @@
+server:
+  port: 7004
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://euk1.com:7001/eureka/
+spring:
+  application:
+    name: uereka-consumer

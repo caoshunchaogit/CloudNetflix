@@ -1,0 +1,9 @@
+eureka:
+  client:
+    service-url:  # 服务注册中心的地址
+      defaultZone: http://euk1.com:7001/eureka/   #单节点搭建
+  instance:
+    hostname: euk2.com
+
+server:
+  port: 7002
