@@ -6,6 +6,7 @@ import com.netflix.discovery.EurekaClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -18,9 +19,10 @@ import java.util.Objects;
 public class MyController {
     @Autowired
     DiscoveryClient client;  //可以获取服务的信息
-
     @Autowired
-    EurekaClient client2;
+    EurekaClient client2;  //eureka的客户端信息
+    @Autowired
+    LoadBalancerClient lb;
 
     @GetMapping("/client")
     public String client(){
@@ -52,5 +54,14 @@ public class MyController {
             }
         }
         return "XXOO";
+    }
+
+    @GetMapping("client4")
+    public Object client4(){
+        ServiceInstance instance = lb.choose("Eureka-provider");  //从列表返回一个服务实例  ribbon会自动剔除DOWN的服务
+        String url = "http://" + instance.getHost() + ":" + instance.getPort() + "/getHi";
+        RestTemplate restTemplate = new RestTemplate();
+        String forObject = restTemplate.getForObject(url, String.class);
+        return forObject;
     }
 }
